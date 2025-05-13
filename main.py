@@ -57,7 +57,7 @@ def codificacionNRZ_L(cadena):
     plt.title("Codificación NRZ-L")
 
     # Añade una cuadrícula al gráfico
-    plt.grid(True)
+    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
@@ -122,7 +122,7 @@ def codificacionNRZ_I(cadena):
     plt.title("Codificación NRZ-I")
 
     # Añade una cuadrícula al gráfico
-    plt.grid(True)
+    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
@@ -188,7 +188,7 @@ def codificacionBipolarAMI(cadena):
     plt.title("Codificación Bipolar AMI")
 
     # Añade una cuadrícula al gráfico
-    plt.grid(True)
+    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
@@ -254,7 +254,7 @@ def codificacionPseudoternario(cadena):
     plt.title("Codificación Pseudoternario")
 
     # Añade una cuadrícula al gráfico
-    plt.grid(True)
+    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
@@ -320,7 +320,7 @@ def codificacionManchester(cadena):
     plt.title("Codificación Manchester")
 
     # Añade una cuadrícula al gráfico
-    plt.grid(True)
+    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
@@ -414,7 +414,7 @@ def codificacionCodigoDiferencial(cadena):
     plt.title("Codificación Diferencial Manchester")
 
     # Añade una cuadrícula al gráfico
-    plt.grid(True)
+    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
