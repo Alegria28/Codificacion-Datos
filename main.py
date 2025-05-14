@@ -1,13 +1,13 @@
 # cspell: ignore caracter, Pseudoternario, duracion, opcion, graficar, codificacion, transicion
 
-# Importa la librería matplotlib para crear gráficos.
+# Importa la librería matplotlib para crear gráficos
 import matplotlib.pyplot as plt
 
 
 # ---- Codificaciones ----#
 def codificacionNRZ_L(cadena):
     # NRZ-L: '1' es nivel alto, '0' es nivel bajo
-    
+
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
     tiempo = []
     voltaje = []
@@ -44,9 +44,21 @@ def codificacionNRZ_L(cadena):
     # Dibuja la señal codificada
     plt.plot(tiempo, voltaje, drawstyle="steps-post")
 
-    # Establece las etiquetas para los ejes X e Y
-    plt.xlabel("Secuencia de bits")
-    plt.ylabel("Nivel del bit")
+    # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
+    for t in range(0, len(cadena) + 1):
+        plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
+
+    # Agregamos una linea horizontal
+    plt.hlines(y=0.5, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+
+    # Obtener los ejes actuales
+    ax = plt.gca()
+
+    # Quitar los bordes (spines)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
     plt.yticks([nivelBajo, nivelAlto], ["0", "1"])
@@ -56,16 +68,13 @@ def codificacionNRZ_L(cadena):
     # Establece el título del gráfico
     plt.title("Codificación NRZ-L")
 
-    # Añade una cuadrícula al gráfico
-    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
-
     # Muestra el gráfico generado
     plt.show()
 
 
 def codificacionNRZ_I(cadena):
     # NRZ-I: '1' invierte el nivel, '0' lo mantiene
-    
+
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
     tiempo = []
     voltaje = []
@@ -108,9 +117,21 @@ def codificacionNRZ_I(cadena):
     # Dibuja la señal codificada
     plt.plot(tiempo, voltaje, drawstyle="steps-post")
 
-    # Establece las etiquetas para los ejes X e Y
-    plt.xlabel("Secuencia de bits")
-    plt.ylabel("Nivel del bit")
+    # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
+    for t in range(0, len(cadena) + 1):
+        plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
+
+    # Agregamos una linea horizontal
+    plt.hlines(y=0.5, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+
+    # Obtener los ejes actuales
+    ax = plt.gca()
+
+    # Quitar los bordes (spines)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
     plt.yticks([nivelBajo, nivelAlto], ["0", "1"])
@@ -121,16 +142,13 @@ def codificacionNRZ_I(cadena):
     # Establece el título del gráfico
     plt.title("Codificación NRZ-I")
 
-    # Añade una cuadrícula al gráfico
-    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
-
     # Muestra el gráfico generado
     plt.show()
 
 
 def codificacionBipolarAMI(cadena):
     # Bipolar AMI: '0' es nivel cero, '1' alterna entre +V y -V
-    
+
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
     tiempo = []
     voltaje = []
@@ -155,13 +173,13 @@ def codificacionBipolarAMI(cadena):
 
         if bit == "1":
             if pulsoPositivo:
-                voltaje.extend([nivelAlto, nivelAlto]) # '1' es +V
+                voltaje.extend([nivelAlto, nivelAlto])  # '1' es +V
             else:
-                voltaje.extend([nivelBajo, nivelBajo]) # '1' es -V
-                
-            pulsoPositivo = not pulsoPositivo # Alterna para el próximo '1'
+                voltaje.extend([nivelBajo, nivelBajo])  # '1' es -V
+
+            pulsoPositivo = not pulsoPositivo  # Alterna para el próximo '1'
         else:
-            voltaje.extend([nivelMedio, nivelMedio]) # '0' es nivel cero
+            voltaje.extend([nivelMedio, nivelMedio])  # '0' es nivel cero
 
         # Calcula la posición central del bit para la etiqueta
         posicionesTiempo.append(tiempoActual + duracionBit / 2)
@@ -174,9 +192,21 @@ def codificacionBipolarAMI(cadena):
     # Dibuja la señal codificada
     plt.plot(tiempo, voltaje, drawstyle="steps-post")
 
-    # Establece las etiquetas para los ejes X e Y
-    plt.xlabel("Secuencia de bits")
-    plt.ylabel("Nivel del bit")
+    # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
+    for t in range(0, len(cadena) + 1):
+        plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
+
+    # Agregamos una linea horizontal
+    plt.hlines(y=0, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+
+    # Obtener los ejes actuales
+    ax = plt.gca()
+
+    # Quitar los bordes (spines)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
     plt.yticks([nivelBajo, nivelMedio, nivelAlto], ["-1", "0", "1"])
@@ -187,16 +217,13 @@ def codificacionBipolarAMI(cadena):
     # Establece el título del gráfico
     plt.title("Codificación Bipolar AMI")
 
-    # Añade una cuadrícula al gráfico
-    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
-
     # Muestra el gráfico generado
     plt.show()
 
 
 def codificacionPseudoternario(cadena):
     # Pseudoternario: '1' es nivel cero, '0' alterna entre +V y -V
-    
+
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
     tiempo = []
     voltaje = []
@@ -221,13 +248,13 @@ def codificacionPseudoternario(cadena):
 
         if bit == "0":
             if pulsoPositivo:
-                voltaje.extend([nivelAlto, nivelAlto]) # '0' es +V
+                voltaje.extend([nivelAlto, nivelAlto])  # '0' es +V
             else:
-                voltaje.extend([nivelBajo, nivelBajo]) # '0' es -V
+                voltaje.extend([nivelBajo, nivelBajo])  # '0' es -V
 
-            pulsoPositivo = not pulsoPositivo # Alterna para el próximo '0'
+            pulsoPositivo = not pulsoPositivo  # Alterna para el próximo '0'
         else:
-            voltaje.extend([nivelMedio, nivelMedio]) # '1' es nivel cero
+            voltaje.extend([nivelMedio, nivelMedio])  # '1' es nivel cero
 
         # Calcula la posición central del bit para la etiqueta
         posicionesTiempo.append(tiempoActual + duracionBit / 2)
@@ -240,9 +267,21 @@ def codificacionPseudoternario(cadena):
     # Dibuja la señal codificada
     plt.plot(tiempo, voltaje, drawstyle="steps-post")
 
-    # Establece las etiquetas para los ejes X e Y
-    plt.xlabel("Secuencia de bits")
-    plt.ylabel("Nivel del bit")
+    # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
+    for t in range(0, len(cadena) + 1):
+        plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
+
+    # Agregamos una linea horizontal
+    plt.hlines(y=0, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+
+    # Obtener los ejes actuales
+    ax = plt.gca()
+
+    # Quitar los bordes (spines)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
     plt.yticks([nivelBajo, nivelMedio, nivelAlto], ["-1", "0", "1"])
@@ -253,16 +292,13 @@ def codificacionPseudoternario(cadena):
     # Establece el título del gráfico
     plt.title("Codificación Pseudoternario")
 
-    # Añade una cuadrícula al gráfico
-    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
-
     # Muestra el gráfico generado
     plt.show()
 
 
 def codificacionManchester(cadena):
     # Manchester: '0' es Alto->Bajo, '1' es Bajo->Alto (transición a mitad del bit)
-    
+
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
     tiempo = []
     voltaje = []
@@ -282,17 +318,17 @@ def codificacionManchester(cadena):
         # Primera mitad del bit (0s - 0.5s)
         tiempo.extend([tiempoActual, tiempoActual + duracionBit / 2])
 
-        if bit == "0": # Para '0', la primera mitad es Alta
+        if bit == "0":  # Para '0', la primera mitad es Alta
             voltaje.extend([nivelAlto, nivelAlto])
-        else: # Para '1', la primera mitad es Baja
+        else:  # Para '1', la primera mitad es Baja
             voltaje.extend([nivelBajo, nivelBajo])
 
         # Segunda mitad del bit, transicion (0.5s - 1s)
         tiempo.extend([tiempoActual + duracionBit / 2, tiempoActual + duracionBit])
 
-        if bit == "0": # Para '0', la segunda mitad es Baja (transición Alto->Bajo)
+        if bit == "0":  # Para '0', la segunda mitad es Baja (transición Alto->Bajo)
             voltaje.extend([nivelBajo, nivelBajo])
-        else: # Para '1', la segunda mitad es Alta (transición Bajo->Alto)
+        else:  # Para '1', la segunda mitad es Alta (transición Bajo->Alto)
             voltaje.extend([nivelAlto, nivelAlto])
 
         # Calcula la posición central del bit para la etiqueta
@@ -306,9 +342,21 @@ def codificacionManchester(cadena):
     # Dibuja la señal codificada
     plt.plot(tiempo, voltaje, drawstyle="steps-post")
 
-    # Establece las etiquetas para los ejes X e Y
-    plt.xlabel("Secuencia de bits")
-    plt.ylabel("Nivel del bit")
+    # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
+    for t in range(0, len(cadena) + 1):
+        plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
+
+    # Agregamos una linea horizontal
+    plt.hlines(y=0.5, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+
+    # Obtener los ejes actuales
+    ax = plt.gca()
+
+    # Quitar los bordes (spines)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
     plt.yticks([nivelBajo, nivelAlto], ["0", "1"])
@@ -319,16 +367,13 @@ def codificacionManchester(cadena):
     # Establece el título del gráfico
     plt.title("Codificación Manchester")
 
-    # Añade una cuadrícula al gráfico
-    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
-
     # Muestra el gráfico generado
     plt.show()
 
 
 def codificacionCodigoDiferencial(cadena):
     # Manchester Diferencial: '0' transiciona al inicio, '1' no; siempre transiciona a mitad del bit
-    
+
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
     tiempo = []
     voltaje = []
@@ -347,11 +392,19 @@ def codificacionCodigoDiferencial(cadena):
 
     # Itera sobre cada bit en la cadena de entrada
     for bit in cadena:
-        nivel_para_primera_mitad = 0 # Variable temporal para el cálculo del nivel de la primera mitad
-        nivel_para_segunda_mitad = 0 # Variable temporal para el cálculo del nivel de la segunda mitad
-        
-        nivel_inicio_bit = 0 # Nivel para la primera mitad del bit que se usará en la gráfica
-        nivel_fin_bit = 0    # Nivel para la segunda mitad del bit que se usará en la gráfica
+        nivel_para_primera_mitad = (
+            0  # Variable temporal para el cálculo del nivel de la primera mitad
+        )
+        nivel_para_segunda_mitad = (
+            0  # Variable temporal para el cálculo del nivel de la segunda mitad
+        )
+
+        nivel_inicio_bit = (
+            0  # Nivel para la primera mitad del bit que se usará en la gráfica
+        )
+        nivel_fin_bit = (
+            0  # Nivel para la segunda mitad del bit que se usará en la gráfica
+        )
 
         # Determina el nivel al inicio del bit actual (para la primera mitad)
         # basado en el bit y el nivel final del bit anterior
@@ -376,12 +429,12 @@ def codificacionCodigoDiferencial(cadena):
         nivel_inicio_bit = nivel_para_primera_mitad
         nivel_fin_bit = nivel_para_segunda_mitad
 
-        # Grafica la primera mitad del bit
+        # Gráfica la primera mitad del bit
         # El voltaje se mantiene en nivel_inicio_bit
         tiempo.extend([tiempoActual, tiempoActual + duracionBit / 2])
         voltaje.extend([nivel_inicio_bit, nivel_inicio_bit])
 
-        # Grafica la segunda mitad del bit
+        # Gráfica la segunda mitad del bit
         # El voltaje se mantiene en nivel_fin_bit
         tiempo.extend([tiempoActual + duracionBit / 2, tiempoActual + duracionBit])
         voltaje.extend([nivel_fin_bit, nivel_fin_bit])
@@ -400,9 +453,21 @@ def codificacionCodigoDiferencial(cadena):
     # Dibuja la señal codificada
     plt.plot(tiempo, voltaje, drawstyle="steps-post")
 
-    # Establece las etiquetas para los ejes X e Y
-    plt.xlabel("Secuencia de bits")
-    plt.ylabel("Nivel del bit")
+    # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
+    for t in range(0, len(cadena) + 1):
+        plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
+
+    # Agregamos una linea horizontal
+    plt.hlines(y=0.5, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+
+    # Obtener los ejes actuales
+    ax = plt.gca()
+
+    # Quitar los bordes (spines)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["bottom"].set_visible(False)
+    ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
     plt.yticks([nivelBajo, nivelAlto], [str(nivelBajo), str(nivelAlto)])
@@ -412,9 +477,6 @@ def codificacionCodigoDiferencial(cadena):
 
     # Establece el título del gráfico
     plt.title("Codificación Diferencial Manchester")
-
-    # Añade una cuadrícula al gráfico
-    plt.grid(color = 'blue', linestyle = '--', linewidth = 0.3)
 
     # Muestra el gráfico generado
     plt.show()
@@ -471,7 +533,7 @@ def main():
 
     # Bucle infinito para permitir al usuario ingresar múltiples cadenas.
     while True:
-        valido = True # Bandera para rastrear la validez de la cadena.
+        valido = True  # Bandera para rastrear la validez de la cadena.
 
         # Solicita al usuario que ingrese una cadena de bits.
         print("\nIngrese la secuencia de bits:")
@@ -480,9 +542,9 @@ def main():
         # Verifica que cada carácter en la cadena sea '0' o '1'.
         for caracter in cadena:
             if caracter != "0" and caracter != "1":
-                valido = False # Marca la cadena como no válida.
+                valido = False  # Marca la cadena como no válida.
                 print("Cadena no valida. Use solo '0' y '1'.")
-                break # Sale del bucle de verificación.
+                break  # Sale del bucle de verificación.
 
         # Si la cadena es válida, llama a la función del menú.
         if valido:
