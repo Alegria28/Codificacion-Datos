@@ -39,34 +39,14 @@ pip install matplotlib
 
 ## Encoding Scheme Examples
 
-### NRZ-L
+### Ejemplos de Esquemas de Codificación
 
-![Example of NRZ-L encoding](images/nrz_l_example.png)
-
-
-### NRZ-I
-
-![Example of NRZ-I encoding](images/nrz_i_example.png)
-
-
-### Bipolar AMI
-
-![Example of Bipolar AMI encoding](images/bipolar_ami_example.png)
-
-
-### Pseudoternary
-
-![Example of Pseudoternary encoding](images/pseudoternary_example.png)
-
-
-### Manchester
-
-![Example of Manchester encoding](images/manchester_example.png)
-
-
-### Differential Manchester
-
-![Example of Differential Manchester encoding](images/differential_manchester_example.png)
-
+| NRZ-L | NRZ-I |
+|:---:|:---:|
+| ![NRZ-L](images/nrz_l_example.png) | ![NRZ-I](images/nrz_i_example.png) |
+| **Bipolar AMI** | **Pseudoternario** |
+| ![Bipolar AMI](images/bipolar_ami_example.png) | ![Pseudoternario](images/pseudoternary_example.png) |
+| **Manchester** | **Manchester Diferencial** |
+| ![Manchester](images/manchester_example.png) | ![Manchester Diferencial](images/differential_manchester_example.png) |
 
 ---
