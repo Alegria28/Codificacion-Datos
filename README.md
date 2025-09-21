@@ -1,8 +1,8 @@
-# Data Encoding Visualization
+# 📊 Data Encoding Visualization 📈
 
 This project provides a tool to visualize various digital data encoding schemes. Given a binary string, it can generate plots for different encoding techniques, helping to understand how these schemes represent digital data as analog signals.
 
-## Implemented Encoding Schemes
+## 💡 Implemented Encoding Schemes
 
 The following encoding schemes are supported:
 
@@ -13,7 +13,7 @@ The following encoding schemes are supported:
 5.  **Manchester**: Each bit period is divided into two halves. A transition occurs in the middle of each bit period. '0' is represented by a high-to-low transition, and '1' is represented by a low-to-high transition.
 6.  **Differential Manchester**: A transition always occurs in the middle of each bit period. '0' is represented by an additional transition at the beginning of the bit interval, while '1' is represented by no transition at the beginning of the bit interval.
 
-## Requirements
+## ✅ Requirements
 
 *   Python 3.x
 *   Matplotlib
@@ -23,7 +23,7 @@ You can install Matplotlib using pip:
 pip install matplotlib
 ```
 
-## How to Run
+## 🚀 How to Run
 
 1.  Ensure you have Python and Matplotlib installed.
 2.  Clone or download this repository.
@@ -37,7 +37,7 @@ pip install matplotlib
 7.  Choose an option from the menu to generate and display the plot.
 8.  You can then choose to plot the same bit sequence with a different encoding, enter a new bit sequence, or exit the program.
 
-## Encoding Scheme Examples
+## 🖼️ Encoding Scheme Examples
 
 | NRZ-L | NRZ-I |
 |:---:|:---:|
