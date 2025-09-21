@@ -2,38 +2,38 @@
 import matplotlib.pyplot as plt
 
 
-def graficar(cadena):
+def plot(bit_string):
     # Manchester Diferencial: '0' transiciona al inicio, '1' no; siempre transiciona a mitad del bit
 
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
-    tiempo = []
-    voltaje = []
+    time = []
+    voltage = []
     # Tiempo actual, inicia en 0
-    tiempoActual = 0
+    current_time = 0
     # Duración de cada bit en la gráfica
-    duracionBit = 1
+    bit_duration = 1
     # Listas para las etiquetas y sus posiciones en el eje X
-    etiquetaTiempo = []
-    posicionesTiempo = []
+    time_labels = []
+    time_positions = []
     # Define los niveles de voltaje alto y bajo
-    nivelAlto = 1
-    nivelBajo = 0
+    high_level = 1
+    low_level = 0
     # Nivel al final del bit anterior, se asume alto inicialmente
-    nivelAlFinalDelBitAnterior = nivelAlto
+    level_at_end_of_previous_bit = high_level
 
     # Itera sobre cada bit en la cadena de entrada
-    for bit in cadena:
-        nivel_para_primera_mitad = (
+    for bit in bit_string:
+        level_for_first_half = (
             0  # Variable temporal para el cálculo del nivel de la primera mitad
         )
-        nivel_para_segunda_mitad = (
+        level_for_second_half = (
             0  # Variable temporal para el cálculo del nivel de la segunda mitad
         )
 
-        nivel_inicio_bit = (
+        bit_start_level = (
             0  # Nivel para la primera mitad del bit que se usará en la gráfica
         )
-        nivel_fin_bit = (
+        bit_end_level = (
             0  # Nivel para la segunda mitad del bit que se usará en la gráfica
         )
 
@@ -41,55 +41,55 @@ def graficar(cadena):
         # basado en el bit y el nivel final del bit anterior
         if bit == "0":
             # Hay transición al inicio del bit para un '0'
-            if nivelAlFinalDelBitAnterior == nivelBajo:
-                nivel_para_primera_mitad = nivelAlto
-            else:  # nivelAlFinalDelBitAnterior == nivelAlto
-                nivel_para_primera_mitad = nivelBajo
+            if level_at_end_of_previous_bit == low_level:
+                level_for_first_half = high_level
+            else:  # level_at_end_of_previous_bit == high_level
+                level_for_first_half = low_level
         else:  # bit == '1'
             # No hay transición al inicio del bit para un '1'
-            nivel_para_primera_mitad = nivelAlFinalDelBitAnterior
+            level_for_first_half = level_at_end_of_previous_bit
 
         # Determina el nivel para la segunda mitad del bit
         # Siempre hay una transición a mitad del bit
-        if nivel_para_primera_mitad == nivelBajo:
-            nivel_para_segunda_mitad = nivelAlto
-        else:  # nivel_para_primera_mitad == nivelAlto
-            nivel_para_segunda_mitad = nivelBajo
+        if level_for_first_half == low_level:
+            level_for_second_half = high_level
+        else:  # level_for_first_half == high_level
+            level_for_second_half = low_level
 
         # Asigna los niveles calculados a las variables que se usarán para graficar
-        nivel_inicio_bit = nivel_para_primera_mitad
-        nivel_fin_bit = nivel_para_segunda_mitad
+        bit_start_level = level_for_first_half
+        bit_end_level = level_for_second_half
 
         # Gráfica la primera mitad del bit
         # El voltaje se mantiene en nivel_inicio_bit
-        tiempo.extend([tiempoActual, tiempoActual + duracionBit / 2])
-        voltaje.extend([nivel_inicio_bit, nivel_inicio_bit])
+        time.extend([current_time, current_time + bit_duration / 2])
+        voltage.extend([bit_start_level, bit_start_level])
 
         # Gráfica la segunda mitad del bit
         # El voltaje se mantiene en nivel_fin_bit
-        tiempo.extend([tiempoActual + duracionBit / 2, tiempoActual + duracionBit])
-        voltaje.extend([nivel_fin_bit, nivel_fin_bit])
+        time.extend([current_time + bit_duration / 2, current_time + bit_duration])
+        voltage.extend([bit_end_level, bit_end_level])
 
         # Actualiza el nivel final para el siguiente bit
-        nivelAlFinalDelBitAnterior = nivel_fin_bit
+        level_at_end_of_previous_bit = bit_end_level
 
         # Calcula la posición central del bit para la etiqueta
-        posicionesTiempo.append(tiempoActual + duracionBit / 2)
+        time_positions.append(current_time + bit_duration / 2)
         # Añade el bit actual como etiqueta
-        etiquetaTiempo.append(str(bit))
+        time_labels.append(str(bit))
 
         # Incrementa el tiempo actual para el siguiente bit
-        tiempoActual += duracionBit
+        current_time += bit_duration
 
     # Dibuja la señal codificada
-    plt.plot(tiempo, voltaje, drawstyle="steps-post")
+    plt.plot(time, voltage, drawstyle="steps-post")
 
     # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
-    for t in range(0, len(cadena) + 1):
+    for t in range(0, len(bit_string) + 1):
         plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
 
     # Agregamos una linea horizontal
-    plt.hlines(y=0.5, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+    plt.hlines(y=0.5, xmin=0, xmax=len(bit_string), color="gray", linestyle="--", alpha=0.5)
 
     # Obtener los ejes actuales
     ax = plt.gca()
@@ -101,13 +101,13 @@ def graficar(cadena):
     ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
-    plt.yticks([nivelBajo, nivelAlto], [str(nivelBajo), str(nivelAlto)])
+    plt.yticks([low_level, high_level], [str(low_level), str(high_level)])
 
     # Define las marcas (ticks) y etiquetas para el eje X
-    plt.xticks(posicionesTiempo, etiquetaTiempo)
+    plt.xticks(time_positions, time_labels)
 
     # Establece el título del gráfico
-    plt.title("Codificación Diferencial Manchester")
+    plt.title("Differential Manchester Encoding")
 
     # Muestra el gráfico generado
     plt.show()

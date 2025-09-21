@@ -2,58 +2,58 @@
 import matplotlib.pyplot as plt
 
 
-def graficar(cadena):
+def plot(bit_string):
     # Pseudoternario: '1' es nivel cero, '0' alterna entre +V y -V
 
     # Vectores para almacenar los puntos de la gráfica (tiempo y voltaje)
-    tiempo = []
-    voltaje = []
+    time = []
+    voltage = []
     # Tiempo actual, inicia en 0
-    tiempoActual = 0
+    current_time = 0
     # Duración de cada bit en la gráfica
-    duracionBit = 1
+    bit_duration = 1
     # Listas para las etiquetas y sus posiciones en el eje X
-    etiquetaTiempo = []
-    posicionesTiempo = []
+    time_labels = []
+    time_positions = []
     # Define los niveles de voltaje: alto, medio (cero) y bajo
-    nivelAlto = 1
-    nivelMedio = 0
-    nivelBajo = -1
+    high_level = 1
+    mid_level = 0
+    low_level = -1
     # Estado del pulso para el próximo '0' (True para +V, False para -V)
-    pulsoPositivo = True
+    is_pulse_positive = True
 
     # Itera sobre cada bit en la cadena de entrada
-    for bit in cadena:
+    for bit in bit_string:
         # Añade los puntos de inicio y fin del bit actual en el eje de tiempo
-        tiempo.extend([tiempoActual, tiempoActual + duracionBit])
+        time.extend([current_time, current_time + bit_duration])
 
         if bit == "0":
-            if pulsoPositivo:
-                voltaje.extend([nivelAlto, nivelAlto])  # '0' es +V
+            if is_pulse_positive:
+                voltage.extend([high_level, high_level])  # '0' es +V
             else:
-                voltaje.extend([nivelBajo, nivelBajo])  # '0' es -V
+                voltage.extend([low_level, low_level])  # '0' es -V
 
-            pulsoPositivo = not pulsoPositivo  # Alterna para el próximo '0'
+            is_pulse_positive = not is_pulse_positive  # Alterna para el próximo '0'
         else:
-            voltaje.extend([nivelMedio, nivelMedio])  # '1' es nivel cero
+            voltage.extend([mid_level, mid_level])  # '1' es nivel cero
 
         # Calcula la posición central del bit para la etiqueta
-        posicionesTiempo.append(tiempoActual + duracionBit / 2)
+        time_positions.append(current_time + bit_duration / 2)
         # Añade el bit actual como etiqueta
-        etiquetaTiempo.append(str(bit))
+        time_labels.append(str(bit))
 
         # Incrementa el tiempo actual para el siguiente bit
-        tiempoActual += duracionBit
+        current_time += bit_duration
 
     # Dibuja la señal codificada
-    plt.plot(tiempo, voltaje, drawstyle="steps-post")
+    plt.plot(time, voltage, drawstyle="steps-post")
 
     # Agregamos lineas verticales para separar los ejes X (recorriendo nuestra cadena)
-    for t in range(0, len(cadena) + 1):
+    for t in range(0, len(bit_string) + 1):
         plt.axvline(x=t, color="gray", linestyle="--", alpha=0.5)
 
     # Agregamos una linea horizontal
-    plt.hlines(y=0, xmin=0, xmax=len(cadena), color="gray", linestyle="--", alpha=0.5)
+    plt.hlines(y=0, xmin=0, xmax=len(bit_string), color="gray", linestyle="--", alpha=0.5)
 
     # Obtener los ejes actuales
     ax = plt.gca()
@@ -65,13 +65,13 @@ def graficar(cadena):
     ax.spines["left"].set_visible(False)
 
     # Define las marcas (ticks) y etiquetas para el eje Y
-    plt.yticks([nivelBajo, nivelMedio, nivelAlto], ["-1", "0", "1"])
+    plt.yticks([low_level, mid_level, high_level], ["-1", "0", "1"])
 
     # Define las marcas (ticks) y etiquetas para el eje X
-    plt.xticks(posicionesTiempo, etiquetaTiempo)
+    plt.xticks(time_positions, time_labels)
 
     # Establece el título del gráfico
-    plt.title("Codificación Pseudoternario")
+    plt.title("Pseudoternary Encoding")
 
     # Muestra el gráfico generado
     plt.show()

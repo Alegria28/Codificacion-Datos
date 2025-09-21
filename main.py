@@ -1,81 +1,81 @@
 # cspell: ignore caracter, Pseudoternario, duracion, opcion, graficar, codificacion, transicion
 
 # Importamos los archivos para las modificaciones
-import codificacionNRZ_L
-import codificacionNRZ_I
-import codificacionBipolarAMI
-import codificacionPseudoternario
-import codificacionManchester
-import codificacionCodigoDiferencial
+import nrz_l_encoding
+import nrz_i_encoding
+import bipolar_ami_encoding
+import pseudoternary_encoding
+import manchester_encoding
+import differential_manchester_encoding
 
 
 # Función para mostrar el menu
-def menu(cadena):
+def show_menu(bit_string):
     # Menú de opciones
     while True:
-        print("\nSeleccione el tipo de codificación:")
+        print("\nSelect the encoding type:")
         print("1. NRZ-L")
         print("2. NRZ-I")
         print("3. Bipolar AMI")
-        print("4. Pseudoternario")
+        print("4. Pseudoternary")
         print("5. Manchester")
-        print("6. Código diferencial")
-        print("7. Nueva cadena")
-        print("8. Salir")
-        opcion = input("- ")
+        print("6. Differential Manchester")
+        print("7. New bit string")
+        print("8. Exit")
+        option = input("- ")
 
         # Según la opcion del usuario, se llamara a la función deseada
-        if opcion == "1":
-            codificacionNRZ_L.graficar(cadena)
+        if option == "1":
+            nrz_l_encoding.plot(bit_string)
 
-        elif opcion == "2":
-            codificacionNRZ_I.graficar(cadena)
+        elif option == "2":
+            nrz_i_encoding.plot(bit_string)
 
-        elif opcion == "3":
-            codificacionBipolarAMI.graficar(cadena)
+        elif option == "3":
+            bipolar_ami_encoding.plot(bit_string)
 
-        elif opcion == "4":
-            codificacionPseudoternario.graficar(cadena)
+        elif option == "4":
+            pseudoternary_encoding.plot(bit_string)
 
-        elif opcion == "5":
-            codificacionManchester.graficar(cadena)
+        elif option == "5":
+            manchester_encoding.plot(bit_string)
 
-        elif opcion == "6":
-            codificacionCodigoDiferencial.graficar(cadena)
+        elif option == "6":
+            differential_manchester_encoding.plot(bit_string)
 
-        elif opcion == "7":
+        elif option == "7":
             # Terminamos este ciclo y regresamos a main()
-            print("Ingresa nueva cadena")
+            print("Enter a new bit string")
             break
 
-        elif opcion == "8":
+        elif option == "8":
             # Terminamos todo el programa
             exit()
 
         else:
-            print("Opción no válida, intente de nuevo.")
+            print("Invalid option, please try again.")
 
 
 def main():
 
     # Bucle infinito para permitir al usuario ingresar múltiples cadenas.
     while True:
-        valido = True  # Bandera para rastrear la validez de la cadena.
+        is_valid = True  # Bandera para rastrear la validez de la cadena.
 
         # Solicita al usuario que ingrese una cadena de bits.
-        print("\nIngrese la secuencia de bits:")
-        cadena = str(input("- "))
+        print("\nEnter the bit sequence:")
+        bit_string = str(input("- "))
 
         # Verifica que cada carácter en la cadena sea '0' o '1'.
-        for caracter in cadena:
-            if caracter != "0" and caracter != "1":
-                valido = False  # Marca la cadena como no válida.
-                print("Cadena no valida. Use solo '0' y '1'.")
+        for character in bit_string:
+            if character != "0" and character != "1":
+                is_valid = False  # Marca la cadena como no válida.
+                print("Invalid string. Use only '0' and '1'.")
                 break  # Sale del bucle de verificación.
 
         # Si la cadena es válida, llama a la función del menú.
-        if valido:
-            menu(cadena)
+        if is_valid:
+            show_menu(bit_string)
 
 
 # Iniciamos el programa desde el main
